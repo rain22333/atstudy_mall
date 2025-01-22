@@ -55,6 +55,5 @@ struct MainPage {
     .height("100%")
     .alignItems(HorizontalAlign.Center)
     .justifyContent(FlexAlign.Center)
-
   }
 }
