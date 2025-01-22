@@ -8,4 +8,12 @@ const classifyTitle: Resource[] = [
   $r('app.string.title_bar_furniture_kitchenware')
 ]
 
-export {  classifyTitle}
+const swiperImage: Resource[] = [
+  $r('app.media.ic_banner001'),
+  $r('app.media.ic_banner002'),
+  $r('app.media.ic_banner003'),
+  $r('app.media.ic_banner004')
+]
+
+
+export {  swiperImage,classifyTitle}

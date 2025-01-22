@@ -1,4 +1,5 @@
 import { buttonInfo, ButtonInfoModel } from '../viewmodel/MainPageData'
+import { Home } from './Home'
 
 @Entry
 @Component
@@ -15,7 +16,7 @@ struct MainPage {
         index: this.currentPageIndex
       }){
         TabContent(){
-          Text("首页")
+          Home()
         }.tabBar(this.TabButton(buttonInfo[0]))
 
         TabContent(){

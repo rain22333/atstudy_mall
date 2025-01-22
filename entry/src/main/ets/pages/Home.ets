@@ -1,9 +1,9 @@
 import { it } from '@ohos/hypium'
-import { classifyTitle } from '../viewmodel/HomeData'
+import { classifyTitle, swiperImage } from '../viewmodel/HomeData'
 
 @Entry
 @Component
-struct Home {
+export struct Home {
 
   @State
   titleIndex:number | undefined = undefined     // 选中的分类的索引
@@ -20,13 +20,14 @@ struct Home {
 
           // 搜索框
           this.SearchTitle()
-          Scroll(){
+          // Scroll(){
 
             // 分类
             this.ClassifyTitle()
           
 
             // 轮播
+            this.CustomerSwiper()
 
 
             // 轮播下方文字
@@ -34,7 +35,7 @@ struct Home {
             // 商品列表
           }
 
-        }.padding(10)
+        // }.padding(10)
 
       }
   }
@@ -77,6 +78,10 @@ struct Home {
   }
   
   
+  
+  /**
+   * 分类
+   */
   @Builder
   ClassifyTitle(){
 
@@ -115,5 +120,31 @@ struct Home {
 
     }.margin({top:20})
   }
+  
+  
+  /**
+   * 轮播图组件
+   */
+  @Builder
+  CustomerSwiper(){
+    Swiper(){
+      ForEach(swiperImage,(item:Resource)=>{
+        Image(item)
+          .width("100%")
+          .aspectRatio(2.2)
+          .borderRadius(15)
+          .backgroundColor(Color.White)
+      })
+    }.autoPlay(true)
+    .itemSpace(0)
+    .width("100%")
+    .indicator(new DotIndicator().selectedColor('#ccc'))
+    .displayCount(1)
+    .margin({
+      top: 12,
+      bottom: 12
+    })
+  }
+  
 
 }
