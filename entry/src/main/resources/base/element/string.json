@@ -44,6 +44,40 @@
     {
       "name": "title_bar_classification",
       "value": "分类"
+    },
+
+
+    {
+      "name": "activity_title_all",
+      "value": "全部"
+    },
+    {
+      "name": "activity_title_selected",
+      "value": "精选"
+    },
+    {
+      "name": "activity_title_new_products",
+      "value": "新品"
+    },
+    {
+      "name": "activity_title_affordable",
+      "value": "实惠"
+    },
+    {
+      "name": "activity_title_all_desc",
+      "value": "为你推荐"
+    },
+    {
+      "name": "activity_title_selected_desc",
+      "value": "发现好货"
+    },
+    {
+      "name": "activity_title_new_products_desc",
+      "value": "新品首发"
+    },
+    {
+      "name": "activity_title_affordable_desc",
+      "value": "便宜好货"
     }
   ]
 }

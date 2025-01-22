@@ -16,4 +16,28 @@ const swiperImage: Resource[] = [
 ]
 
 
-export {  swiperImage,classifyTitle}
+export class ActivityTitleModel {
+  title?: Resource
+  desc?: Resource
+}
+
+const activityTitle: ActivityTitleModel[] = [
+  {
+    title: $r('app.string.activity_title_all'),
+    desc: $r('app.string.activity_title_all_desc')
+  },
+  {
+    title: $r('app.string.activity_title_selected'),
+    desc: $r('app.string.activity_title_selected_desc')
+  },
+  {
+    title: $r('app.string.activity_title_new_products'),
+    desc: $r('app.string.activity_title_new_products_desc')
+  },
+  {
+    title: $r('app.string.activity_title_affordable'),
+    desc: $r('app.string.activity_title_affordable_desc')
+  }
+]
+
+export {  swiperImage,classifyTitle,activityTitle}

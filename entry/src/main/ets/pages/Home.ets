@@ -1,5 +1,5 @@
 import { it } from '@ohos/hypium'
-import { classifyTitle, swiperImage } from '../viewmodel/HomeData'
+import { activityTitle, ActivityTitleModel, classifyTitle, swiperImage } from '../viewmodel/HomeData'
 
 @Entry
 @Component
@@ -7,6 +7,9 @@ export struct Home {
 
   @State
   titleIndex:number | undefined = undefined     // 选中的分类的索引
+
+  @State
+  activityTitleIndex:number = 0               // 选中轮播图下方的文字的索引
 
   build() {
 
@@ -31,6 +34,7 @@ export struct Home {
 
 
             // 轮播下方文字
+          this.ActivityTitle()
 
             // 商品列表
           }
@@ -146,5 +150,40 @@ export struct Home {
     })
   }
   
+
+  /**
+   * 轮播下方的文字
+   */
+  @Builder
+  ActivityTitle(){
+    Flex({justifyContent:FlexAlign.SpaceAround}){
+      ForEach(activityTitle,(item:ActivityTitleModel,index:number)=>{
+        Flex({
+          direction:FlexDirection.Column,
+          justifyContent:FlexAlign.Center,
+          alignItems:ItemAlign.Center
+        }){
+          Text(item.title)
+            .fontWeight(500)
+            .fontColor(Color.Black)
+            .fontColor( this.activityTitleIndex === index ? Color.Red : Color.Black)
+            .margin({bottom:5})
+
+          Text(item.desc)
+            .fontSize(14)
+            .fontColor( this.activityTitleIndex === index ? Color.Red : '#666')
+            .fontWeight(300)
+            .opacity(this.activityTitleIndex === index ? 1 : 0.8)
+        }.onClick(()=>{
+          this.activityTitleIndex = index
+        })
+        .height("100%")
+      })
+    }.height(60)
+    .width("100%")
+    .padding(13)
+    .margin({top:8,bottom:8})
+    .backgroundColor('#f3f3f3')
+  }
 
 }
