@@ -9,10 +9,18 @@ import json from '@ohos.util.json'
 @Component
 struct Login {
   async aboutToAppear(): Promise<void> {
-    // 验证登陆
-    let response:AxiosResponse = await login('13600000002',"abc123")
-    console.info(`=======>${JSON.stringify(response.data)}`)
+    // 在登陆页面创建出来之后 将这个缓存对象创建
+    PersistentStorage.PersistProp('token','')//启动页面，初始化token
   }
+
+  @State
+  username:string = ''        // 手机号
+
+  @State
+  password:string = ''        // 密码
+
+
+  @StorageLink('token') token:string = '' //双向同步token
 
   build() {
     Column() {
@@ -29,9 +37,9 @@ struct Login {
         .margin({top:30})
 
 
-      TextInput({placeholder:"请输入用户名"})
+      TextInput({placeholder:"请输入用户名",text:this.username})
         .margin({top:30})
-      TextInput({placeholder:"请输入密码"})
+      TextInput({placeholder:"请输入密码",text:this.password})
         .margin({top:30})
         .type(InputType.Password)
 
@@ -41,6 +49,18 @@ struct Login {
         .borderRadius(15)
         .width("100%")
         .margin({top:30})
+        .onClick(async ()=>{
+          // 发送登陆请求 跳转到首页
+          let response:AxiosResponse = await login(this.username,this.password)
+          // 如果存在token 应该将token添加到缓存中
+         if(response.data.data){
+           this.token = response.data.data
+         }
+          // 跳转页面
+          // router.pushUrl({
+          //   url:''
+          // })
+        })
 
 
       Text("注册账号")
