@@ -1,3 +1,5 @@
+import { AxiosResponse } from '@ohos/axios'
+import { regist } from '../data/Customer'
 
 /**
  * 注册页面
@@ -5,6 +7,10 @@
 @Entry
 @Component
 struct Reg {
+  async aboutToAppear(): Promise<void> {
+    let response:AxiosResponse = await regist("13112345645","abc123","user123")
+    AlertDialog.show({message:JSON.stringify(response)})
+  }
 
   build() {
     Column(){
@@ -41,6 +47,9 @@ struct Reg {
         .width("100%")
         .borderRadius(15)
         .backgroundColor(Color.Red)
+        .onClick(()=>{
+          // TODO: 自己写注册的逻辑
+        })
 
     }.height("100%")
     .width("100%")
