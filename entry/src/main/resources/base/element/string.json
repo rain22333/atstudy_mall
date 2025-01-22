@@ -11,6 +11,39 @@
     {
       "name": "EntryAbility_label",
       "value": "label"
+    },
+
+    {
+      "name": "title_bar_homepage",
+      "value": "首页"
+    },
+    {
+      "name": "title_bar_phone",
+      "value": "手机"
+    },
+    {
+      "name": "title_bar_computer",
+      "value": "电脑"
+    },
+    {
+      "name": "title_bar_foods",
+      "value": "食品"
+    },
+    {
+      "name": "title_bar_men_wear",
+      "value": "男装"
+    },
+    {
+      "name": "title_bar_fresh",
+      "value": "生鲜"
+    },
+    {
+      "name": "title_bar_furniture_kitchenware",
+      "value": "家具厨具"
+    },
+    {
+      "name": "title_bar_classification",
+      "value": "分类"
     }
   ]
 }
