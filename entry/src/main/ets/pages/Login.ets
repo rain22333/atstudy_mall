@@ -57,9 +57,9 @@ struct Login {
            this.token = response.data.data
          }
           // 跳转页面
-          // router.pushUrl({
-          //   url:''
-          // })
+          router.pushUrl({
+            url: "pages/MainPage"
+          })
         })
 
 
