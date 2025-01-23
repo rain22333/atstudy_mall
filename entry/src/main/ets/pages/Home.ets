@@ -1,4 +1,5 @@
 import { it } from '@ohos/hypium'
+import { CommodityList } from '../component/CommodityList'
 import { Commodity, commodityData } from '../viewmodel/ComodityModel'
 import { activityTitle, ActivityTitleModel, classifyTitle, swiperImage } from '../viewmodel/HomeData'
 
@@ -9,6 +10,18 @@ export struct Home {
   titleIndex: number | undefined = undefined // 选中的分类的索引
   @State
   activityTitleIndex: number = 0 // 选中轮播图下方的文字的索引
+
+
+  private onClickItem = (Commodity:Commodity) => {}
+
+
+  @State
+  commodityList:Commodity[]  =[]        // 商品列表
+
+  aboutToAppear(): void {
+    // 静态加载商品数据
+    this.commodityList = commodityData
+  }
 
   build() {
 
@@ -36,8 +49,11 @@ export struct Home {
         this.ActivityTitle()
 
         // 商品列表
-        this.CommodityItem(commodityData[0])
-
+        CommodityList({
+          commodityList: $commodityList,
+          colum:2,
+          onClickItem:(data:Commodity):void => this.onClickItem(data)
+        })
       }
 
       // }.padding(10)
@@ -181,62 +197,5 @@ export struct Home {
     .backgroundColor('#f3f3f3')
   }
 
-  /**
-   * 一个商品
-   */
-  @Builder
-  CommodityItem(info: Commodity) {
-    Column() {
-      Image(`http://124.222.209.62/api/img/`
-        + info.attrKeyList[0].attrValueList[0].value_images[0]
-      )
-        .width(120)
-        .height(120)
-        .objectFit(ImageFit.Contain)
 
-
-      Column(){
-        // 【商品名字】 商品标题
-        Text(`【${info.spu_name}】${info.spu_title}`)
-          .fontColor(Color.Black)
-          .fontSize(14)
-          .fontWeight(400)
-          .maxLines(2)
-          .textOverflow({overflow:TextOverflow.Ellipsis})
-          .lineHeight(20)
-
-        // 商品价格
-        Text(`￥${info.skuList[0].sku_price}`)
-          .fontColor(Color.Red)
-          .margin({
-            top:4,
-            bottom:4
-          })
-
-        // 促销标签
-        Text(`${info.promotion}`)
-          .fontColor(Color.White)
-          .backgroundColor(Color.Red)
-          .fontSize(10)
-          .height(16)
-          .padding({
-            left:8,
-            right:8
-          })
-          .borderRadius(4)
-      }.width("100%")
-      .alignItems(HorizontalAlign.Start)
-
-
-    }.padding({
-      top:5,
-      bottom:5,
-      left:10,
-      right:10
-    })
-    .backgroundColor(Color.White)
-    .borderRadius(8)
-    .width("100%")
-    .height(250)
-  }
 }

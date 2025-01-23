@@ -4,6 +4,7 @@
     "pages/Reg",
     "pages/Login",
     "pages/MainPage",
-    "pages/Home"
+    "pages/Home",
+    "pages/CommodityDetailPage"
   ]
 }
