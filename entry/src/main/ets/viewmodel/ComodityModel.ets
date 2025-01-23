@@ -3,14 +3,23 @@ export class SkuList {
   sku_price: number = 0;
 }
 
+/**
+ * 属性键
+ */
 export class AttrKeyList{
-  key_id: string = '';
-  attrValueList: AttrValueList[] = [];
+  key_id: string = '';          // 属性键id
+  key_name:string = '';         // 属性键名字
+  key_ishigh?:number = 0;       // 是否是高级属性
+  attrValueList: AttrValueList[] = [];    // 属性值列表
 }
-
+// 属性键id
+/**
+ * 属性值
+ */
 export class AttrValueList{
-  value_id:number = 0;
-  value_images:string[] = []
+  value_id:number = 0;          // 属性值id
+  value_name: string = '0';     // 属性值名字
+  value_images:string[] = []    // 属性值图片
 }
 
 @Observed
@@ -55,6 +64,9 @@ export const barData: BarData[] = [
   }
 ]
 
+/**
+ * 导出的静态的商品数据
+ */
 export const commodityData: Commodity[] = [
   {
     spu_id: '1',
@@ -70,10 +82,37 @@ export const commodityData: Commodity[] = [
     attrKeyList: [
       {
         key_id: '1',
+        key_name: "尺寸",
         attrValueList: [
           {
             value_id:1,
-            value_images:['group1/M00/00/00/1-c348a70783d2aee0.jpg']
+            value_name:"55英寸",
+            value_images:[
+              'group1/M00/00/00/122-cbcd2abdaba1d31e.jpg',
+              'group1/M00/00/00/122-b73b6a5f32f1e501.jpg']
+          },
+          {
+            value_id:2,
+            value_name:"65英寸",
+            value_images:[
+              'group1/M00/00/00/123-57d1bf9bc01ef8d5.jpg',
+              'group1/M00/00/00/123-a8831bf34dbc3a2e.jpg']
+          }
+        ]
+      },
+      {
+        key_id: '2',
+        key_name: "版本",
+        attrValueList: [
+          {
+            value_id:1,
+            value_name:"3+16GB 分布式游戏8K解码爆款",
+            value_images:[]
+          },
+          {
+            value_id:2,
+            value_name:"3+32GB 莱茵双护眼大内存新品",
+            value_images:[]
           }
         ]
       }
@@ -82,7 +121,7 @@ export const commodityData: Commodity[] = [
   {
     spu_id: '2',
     spu_name: 'TCL',
-    spu_title: '海信电视机',
+    spu_title: 'TCL电视机',
     promotion: '新品',
     skuList: [
       {
@@ -93,10 +132,41 @@ export const commodityData: Commodity[] = [
     attrKeyList: [
       {
         key_id: '1',
+        key_name: "尺寸",
         attrValueList: [
           {
             value_id:1,
-            value_images:['group1/M00/00/00/9-d953542b35b6936f.jpg']
+            value_name:"55英寸",
+            value_images:[
+              'group1/M00/00/00/1-c348a70783d2aee0.jpg',
+              'group1/M00/00/00/9-d953542b35b6936f.jpg']
+          }
+        ]
+      }
+    ]
+  },
+  {
+    spu_id: '3',
+    spu_name: '长虹',
+    spu_title: '长虹电视机',
+    promotion: '新品',
+    skuList: [
+      {
+        sku_id: '1',
+        sku_price: 3199
+      }
+    ],
+    attrKeyList: [
+      {
+        key_id: '1',
+        key_name:"尺寸",
+        attrValueList: [
+          {
+            value_id:1,
+            value_name:"55英寸",
+            value_images:[
+              'group1/M00/00/00/1-c348a70783d2aee0.jpg',
+              'group1/M00/00/00/9-d953542b35b6936f.jpg']
           }
         ]
       }

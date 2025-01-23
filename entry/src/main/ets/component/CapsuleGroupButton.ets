@@ -22,10 +22,10 @@ export struct CapsuleGroupButton{
             .textAlign(TextAlign.Center)
         }.border({
           radius:{
-            topLeft: !!index ? 0 : 20,
-            bottomLeft: !!index ? 0 : 20,
-            topRight: !!index ? 20 : 0,
-            bottomRight: !!index ? 20 : 0,
+            topLeft: !!index ? 0 : 5,
+            bottomLeft: !!index ? 0 : 50,
+            topRight: !!index ? 5 : 0,
+            bottomRight: !!index ? 5 : 0,
           }
         })
         .onClick((event:ClickEvent)=> config.onclick(event))

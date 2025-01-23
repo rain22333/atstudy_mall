@@ -271,6 +271,7 @@ struct CommodityDetailPage {
       .layoutWeight(1)
       .onClick(()=>{
         // 点击规格属性 唤起规格列表弹窗
+        this.dialogController.open()
       })
     }.width("92%")
     .backgroundColorStyle()
