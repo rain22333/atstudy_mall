@@ -12,7 +12,6 @@ export struct CapsuleGroupButton{
   private config:CustomerButtonType[] = []
 
 
-
   build() {
     Flex(){
       ForEach(this.config,(config:CustomerButtonType,index:number)=>{

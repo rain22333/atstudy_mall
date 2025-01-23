@@ -2,6 +2,7 @@ import { router } from '@kit.ArkUI'
 import { it } from '@ohos/hypium'
 import { CapsuleGroupButton } from '../component/CapsuleGroupButton'
 import { BarData, barData, Commodity, commodityData } from '../viewmodel/ComodityModel'
+import { SpecificationDialog } from './SpecificationDialog'
 
 /**
  * 商品详情页面
@@ -11,6 +12,23 @@ import { BarData, barData, Commodity, commodityData } from '../viewmodel/Comodit
 struct CommodityDetailPage {
   @State
   swiperIndex: number = 0 // 轮播器中正在播放的图片的索引
+
+  @State
+  count: number = 1       // 当前选中的规格数
+
+  @State
+  productOptions:string = ''     // 当前选中的规格文案
+
+
+  dialogController: CustomDialogController = new CustomDialogController({
+    builder: SpecificationDialog({
+
+    }),
+    autoCancel:true,     // 不自动取消
+    alignment: DialogAlignment.Bottom,       // 显示的位置
+    customStyle:true
+  })
+
 
   build() {
     // 包含了轮播图片的顶部
@@ -33,6 +51,9 @@ struct CommodityDetailPage {
               Column() {
                 // 商品详情
                 this.TitleBar(commodityData[0])
+
+                // 选择规格
+                this.Specification()
               }
             }
           }
@@ -71,11 +92,10 @@ struct CommodityDetailPage {
         }.titleButton()
 
         // todo: 分享事件
-      }
-
-
-
+      }.backgroundColor(Color.White)
+      .padding(12)
     }
+    .backgroundColor('#f3f4f5')
 
   }
 
@@ -226,8 +246,33 @@ struct CommodityDetailPage {
       }
 
     }
-    .backgroundColor(Color.White)
-    .borderRadius(16)
+    .backgroundColorStyle()
+  }
+
+
+  // 选择规格
+  @Builder
+  Specification(){
+    Row(){
+      Text("已选")
+        .fontColor(Color.Black)
+        .fontSize(14)
+        .fontWeight(700)
+        .margin({right:16})
+
+      Flex({justifyContent: FlexAlign.SpaceBetween}){
+        Text(`${this.productOptions}×${this.count}`)
+          .fontSize(14)
+
+        Image($r('app.media.ic_point'))
+          .width(6)
+          .height(12)
+      }
+      .layoutWeight(1)
+      .onClick(()=>{
+        // 点击规格属性 唤起规格列表弹窗
+      })
+    }.width("92%")
     .backgroundColorStyle()
   }
 
@@ -247,6 +292,9 @@ struct CommodityDetailPage {
       right: 12
     })
   }
+
+
+
 }
 
 @Extend(Button)
