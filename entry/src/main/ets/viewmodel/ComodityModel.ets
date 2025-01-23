@@ -30,6 +30,31 @@ export class Commodity {
 }
 
 
+
+
+//小图标类
+export class BarData {
+  icon?: Resource;
+  text?: Resource|string;
+}
+
+
+//商品详情页，封面轮播下方的小图标数组
+export const barData: BarData[] = [
+  {
+    icon: $r('app.media.ic_bar_share'),
+    text: '分享'
+  },
+  {
+    icon: $r('app.media.ic_collect'),
+    text: '收藏'
+  },
+  {
+    icon: $r('app.media.ic_price'),
+    text: '降价通知'
+  }
+]
+
 export const commodityData: Commodity[] = [
   {
     spu_id: '1',

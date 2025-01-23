@@ -4,7 +4,6 @@ import { Commodity } from "../viewmodel/ComodityModel"
  * 商品列表组件
  */
 @Component
-@Preview
 export struct CommodityList {
   @Link
   commodityList: Commodity[]; // 当前组件的商品列表

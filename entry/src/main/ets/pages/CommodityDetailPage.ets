@@ -1,6 +1,7 @@
 import { router } from '@kit.ArkUI'
 import { it } from '@ohos/hypium'
 import { CapsuleGroupButton } from '../component/CapsuleGroupButton'
+import { BarData, barData, Commodity, commodityData } from '../viewmodel/ComodityModel'
 
 /**
  * 商品详情页面
@@ -12,51 +13,15 @@ struct CommodityDetailPage {
   swiperIndex: number = 0 // 轮播器中正在播放的图片的索引
 
   build() {
-
-
-    Column() {
-
-
-      // 包含了轮播图片的顶部
-      Stack({ alignContent: Alignment.TopStart }) {
-        Flex({ direction: FlexDirection.Row, justifyContent: FlexAlign.SpaceBetween }) {
-          //  顶部的两个图标 负责返回和分享
-          Button() {
-            Image($r('app.media.ic_back'))
-              .height("100%")
-              .aspectRatio(1)
-          }.titleButton()
-          .onClick(() => router.back())
-
-
-          Button() {
-            Image($r('app.media.ic_share'))
-              .height("100%")
-              .aspectRatio(1)
-          }.titleButton()
-
-          // todo: 分享事件
-        }
-      }.padding(20)
-
-
-      // this.CustomerSwiper([
-      //   `group1/M00/00/00/4961-2529e6462a4c9ca3.jpg`,
-      //   `group1/M00/00/00/4961-55c2cabfNe083b446.jpg`
-      // ])
+    // 包含了轮播图片的顶部
+    Stack({ alignContent: Alignment.TopStart }) {
 
       // 下方内容
       Flex({direction:FlexDirection.Column}){
         Scroll(){
-
-          // 屏幕滚动区域
-          GridRow({
-            columns:{sm:4},
-            gutter:12
-          }){
-            GridCol({
-              span:{sm:4}
-            }){
+          //屏幕可滚动区域，
+          GridRow({columns:4,gutter:12}){
+            GridCol({span:4}){
               // 轮播器组件
               this.CustomerSwiper([
                 `group1/M00/00/00/1796-a1a6f8e9e71017d9.jpg`,
@@ -64,33 +29,53 @@ struct CommodityDetailPage {
               ])
             }
 
-            GridCol({
-              span:{sm:4},
-              offset:{lg:12}
-            }){
-              Column(){
+            GridCol({ span:4}) {
+              Column() {
                 // 商品详情
+                this.TitleBar(commodityData[0])
               }
             }
           }
-        }.flexGrow(1)
+        }.flexGrow(2)
 
+        //栅格布局，存放底部购物车栏位
         GridRow({
-          columns:{ sm:4 },
-          gutter: 12
+          columns:4,
+          gutter:12
         }){
           GridCol({
-            span:{sm:4},
-            offset:{lg:2}
+            span:4
           }){
-            // 页面底部
+            //存放底部购物车栏位的内容
             this.ButtonMenu()
           }
         }
+
       }
 
-    }.width("100%")
-    .height("100%")
+      // 顶部内容
+      Flex({ direction: FlexDirection.Row, justifyContent: FlexAlign.SpaceBetween }) {
+        //  顶部的两个图标 负责返回和分享
+        Button() {
+          Image($r('app.media.ic_back'))
+            .height("100%")
+            .aspectRatio(1)
+        }.titleButton()
+        .onClick(() => router.back())
+
+
+        Button() {
+          Image($r('app.media.ic_share'))
+            .height("100%")
+            .aspectRatio(1)
+        }.titleButton()
+
+        // todo: 分享事件
+      }
+
+
+
+    }
 
   }
 
@@ -116,7 +101,7 @@ struct CommodityDetailPage {
         .onClick(() => {
           // TODO: 回到首页页面
         })
-        .height("100%")
+        .height(75)
         .width(75)
 
 
@@ -137,7 +122,7 @@ struct CommodityDetailPage {
         .onClick(() => {
           // TODO: 跳转到购物车页面
         })
-        .height("100%")
+        .height(75)
         .width(75)
 
         // 自定义按钮组
@@ -178,8 +163,8 @@ struct CommodityDetailPage {
             top: 20,
             bottom: 20
           })
-        })
-      }
+        },(item:string)=>JSON.stringify(item))
+      }.height("100%")
       .autoPlay(true)
       .onChange((index: number) => {
         this.swiperIndex = index
@@ -201,8 +186,66 @@ struct CommodityDetailPage {
           bottom: 16
         })
     }.width("100%")
-    .height(550)
+    .height(350)
     .backgroundColor(Color.White)
+  }
+
+  // 商品标题价格栏
+  @Builder
+  TitleBar(payload: Commodity) {
+    Flex({ direction: FlexDirection.Column }) {
+      Text() {
+        Span(`￥`)
+          .fontSize(12)
+          .fontColor(Color.Red)
+        Span(`${payload.skuList[0].sku_price}`)
+          .fontSize(18)
+          .fontColor(Color.Red)
+      }
+
+      Row() {
+        Text(`【${payload.spu_name}】 ${payload.spu_title}`)
+          .fontColor(Color.Black)
+          .fontWeight(900)
+      }.width("100%")
+      .margin({ top: 5 })
+
+
+      Flex({ justifyContent: FlexAlign.SpaceBetween }) {
+        ForEach(barData, (item: BarData) => {
+          Row() {
+            Image(item.icon != undefined ? item.icon : '')
+              .height(16)
+              .width(16)
+              .margin(4)
+            Text(item.text)
+              .fontSize(12)
+              .fontColor('#ccc')
+          }
+        })
+      }
+
+    }
+    .backgroundColor(Color.White)
+    .borderRadius(16)
+    .backgroundColorStyle()
+  }
+
+  @Styles
+  backgroundColorStyle(){
+    .backgroundColor(Color.White)
+    .borderRadius(16)
+    .padding({
+      top: 16,
+      bottom: 16,
+      left: 12,
+      right: 12
+    })
+    .margin({
+      top: 12,
+      left: 12,
+      right: 12
+    })
   }
 }
 
